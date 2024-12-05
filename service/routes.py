@@ -22,7 +22,6 @@ from flask import jsonify, request, abort
 from flask import url_for  # noqa: F401 pylint: disable=unused-import
 from service.models import Product, Category
 from service.common import status  # HTTP Status Codes
-from urllib.parse import quote_plus
 from . import app
 
 
@@ -68,6 +67,8 @@ def check_content_type(content_type):
 ######################################################################
 # C R E A T E   A   N E W   P R O D U C T
 ######################################################################
+
+
 @app.route("/products", methods=["POST"])
 def create_products():
     """
@@ -97,6 +98,7 @@ def create_products():
 ######################################################################
 # L I S T   A L L   P R O D U C T S
 ######################################################################
+
 
 @app.route("/products", methods=["GET"])
 def list_products():
@@ -129,6 +131,7 @@ def list_products():
 ######################################################################
 # R E A D   A   P R O D U C T
 ######################################################################
+
 
 @app.route("/products/<int:product_id>", methods=["GET"])
 def get_products(product_id):
@@ -168,6 +171,7 @@ def update_products(product_id):
 # D E L E T E   A   P R O D U C T
 ######################################################################
 
+
 @app.route("/products/<int:product_id>", methods=["DELETE"])
 def delete_products(product_id):
     """
@@ -180,6 +184,4 @@ def delete_products(product_id):
     product = Product.find(product_id)
     if product:
         product.delete()
-
     return "", status.HTTP_204_NO_CONTENT
-
